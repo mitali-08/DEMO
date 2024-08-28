@@ -15,6 +15,6 @@ pipeline {
 	                 }}
 		stage('Deployment'){
 		   steps {
-		sh 'cp target/DEMO.WAR /home/mitali/Documents/devops/apache-tomcat-9.0.93/webapps'
+		sh 'cp target/DEMO.war /home/mitali/Documents/devops/apache-tomcat-9.0.93/webapps'
 			}}	
 }}
