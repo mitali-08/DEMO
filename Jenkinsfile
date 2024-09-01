@@ -5,11 +5,11 @@ pipeline {
 	stages {
 	    stage('Checkout') {
 	        steps {
-			checkout scm			       
+		       git 'https://github.com/mitali-08/DEMO.git'
 		      }}
 		stage('Build') {
 	           steps {
-			  sh 'JAVA_HOME=/home/grras/slavedir/jdk-11.0.24 /home/grras/slavedir/apache-maven-3.9.4/bin/mvn install'
+			  sh 'JAVA_HOME=/home/grras/slavedir/jdk-11.0.24 /home/grras/slavedir/apache-maven-3.9.8/bin/mvn install'
 	                 }}
 		stage('Deployment'){
 		    steps {
