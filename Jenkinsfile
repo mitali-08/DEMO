@@ -1,30 +1,20 @@
 pipeline {
-        agent any
-        parameters {
-  choice choices: ['DEV', 'QA', 'UAT'], name: 'ENVIRONMENT'
-}
-        stages {
-            stage('Checkout') {
-                steps {
-                        git 'https://github.com/mitali-08/pipelineProject.git'
-                      }}
-                stage('Build') {
-                   steps {
-                          sh 'mvn install'
-                         }}
-                stage('Deployment'){
-                    steps {
-                        script {
-                         sh '''if [ $ENVIRONMENT = "QA" ];then
-        cp target/pipelineProject.war /home/mitali/Documents/devops/apache-tomcat-9.0.93/webapps
-echo "deployment has been done on QA!"
-elif  [ $ENVIRONMENT = "UAT" ];then
-         cp target/pipelineProject.war /home/mitali/Documents/devops/apache-tomcat-9.0.93/webapps
-echo "deployment has been done on UAT!"
-fi'''
-
-                        }}
-}
-}
-}
+	agent{
+	label 'slave-label'
+	}
+	stages {
+	    stage('Checkout') {
+	        steps {
+			checkout scm			       
+		      }}
+		stage('Build') {
+	           steps {
+			  sh 'JAVA_HOME=/home/grras/slavedir/jdk-11.0.24 /home/grras/slavedir/apache-maven-3.9.4/bin/mvn install'
+	                 }}
+		stage('Deployment'){
+		    steps {
+			sh '/home/grras/slavedir/apache-tomcat-9.0.93/webapps
+'
+			}}	
+}}
 
